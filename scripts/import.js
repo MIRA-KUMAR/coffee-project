@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const csv = require('fast-csv');
 
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const { resolve } = require('path');
 const { rejects } = require('assert');
 const { exit } = require('process');
@@ -62,6 +62,7 @@ async function importData() {
 
         const typeData = uniqueTypes.map((type) => {
             return {
+                _id: ObjectId(),
                 name: type, 
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -70,6 +71,7 @@ async function importData() {
 
         const coffeeData = uniqueCoffee.map((coffee) => {
             return {
+                _id: ObjectId(),
                 name: coffee,
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -78,11 +80,45 @@ async function importData() {
 
         const sellerData = uniqueSeller.map((seller) => {
             return {
+                _id: ObjectId(),
                 name: seller,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             }
         });
+
+        // console.log(data);
+        
+        const newData = data.map((obj) => {
+            if (Array.isArray(obj.name)) {
+                obj.name = obj.name.map((coffeeName) =>
+                    coffeeData.find(x => x.name === coffeeName)._id
+                );
+            }
+            else {
+                obj.name = [coffeeData.find(x => x.name === obj.name)._id]
+            }
+            if (Array.isArray(obj.type)) {
+                obj.type = obj.type.map((typeName) => 
+                    typeData.find(x => x.name === typeName)._id
+                );
+            }
+            else {
+                obj.type = [typeData.find(x => x.name === obj.type)._id]
+            }
+           
+            if (Array.isArray(obj.seller)) {
+                obj.seller = obj.seller.map((sellerName) => 
+                    sellerData.find(x => x.name === sellerName)._id
+                );
+            }
+            else {
+                obj.seller = [sellerData.find(x => x.name === obj.seller)._id]
+            }
+           
+            return obj;
+        })
+        // console.log(newData);
 
         // 3. Insert into collections
 
