@@ -9,9 +9,11 @@
 - Mongo
 - Elasticsearch
 
-## Step - 3 Initialize node
+## Step 3 Project Set up
 
 - npm init
+- npm install
+- docker-compose up -d
 
 ## Step 4
 
