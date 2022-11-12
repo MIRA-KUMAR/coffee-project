@@ -18,7 +18,9 @@
 ## Step 4
 
 - Pre-processing and filtering of the dataset
+- Create four Collections - Coffee Names, Coffee Types, Coffee Sellers, Coffee Data and store in `MongoDB`
 
 ## Step 5
 
-- Create four Collections - Coffee Names, Coffee Types, Coffee Sellers, Coffee Data and store in MongoDB
+- Using `ElasticSearch` and `Bulk API` for fast retrieval of data
+- Using `axios` as HTTPClient on the server side

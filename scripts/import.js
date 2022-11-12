@@ -43,10 +43,10 @@ async function importData() {
         const db = connection.db();
 
         // 2. Creating collections 
-        const CoffeeCollections = db.collection('coffeeName');
-        const TypeCollections = db.collection('coffeeType');
-        const SellerCollections = db.collection('coffeeSeller');
-        const CoffeeDataCollections = db.collection('coffeeData')
+        const NameCollection = db.collection('coffeeNames');
+        const TypeCollection = db.collection('coffeeTypes');
+        const SellerCollection = db.collection('coffeeSellers');
+        const CoffeeDataCollection = db.collection('coffeeInformations');
 
         const uniqueTypes = data.map((x) => x.type)
                                 .flat()                                                             // To convert into a single array
@@ -125,10 +125,10 @@ async function importData() {
 
         // 3. Insert into collections
 
-        await TypeCollections.insertMany(typeData);
-        await CoffeeCollections.insertMany(coffeeData);
-        await SellerCollections.insertMany(sellerData);
-        await CoffeeDataCollections.insertMany(newData);
+        await TypeCollection.insertMany(typeData);
+        await NameCollection.insertMany(coffeeData);
+        await SellerCollection.insertMany(sellerData);
+        await CoffeeDataCollection.insertMany(newData);
         console.log('Inserted to DB!')
     }
         catch(err) {
