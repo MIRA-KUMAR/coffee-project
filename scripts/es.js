@@ -31,13 +31,7 @@ const {MongoClient, ObjectId} = require('mongodb');
                 JSON.stringify(rest)
             ];
         }).flat().join('\n');
-        // try
-        // {await axios.put(`http://localhost:9200/${ singularNames[name] }`, {});}
-        // catch(error){
-        //     console.log(error.response.data);
-        //     throw error;
-        // }
-        // console.log(esData);
+        
         const resp = await axios.post(`http://localhost:9200/${ singularNames[name] }/_bulk`, esData + '\n', {
             headers: {
                 'Content-Type': 'application/x-ndjson'
@@ -47,6 +41,6 @@ const {MongoClient, ObjectId} = require('mongodb');
         return resp.data;
     })
     );
-    console.log(d[0].items[0]);
+    //console.log(d[0].items[0]);
     
 })()
