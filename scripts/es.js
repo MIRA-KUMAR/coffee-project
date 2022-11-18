@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const csv = require('fast-csv');
 const axios = require('axios');
-
 const {MongoClient, ObjectId} = require('mongodb');
 // const { exit } = require('process');
 
@@ -11,16 +10,11 @@ const {MongoClient, ObjectId} = require('mongodb');
     const connection = await MongoClient.connect('mongodb://localhost:27017/coffee');
     const db = connection.db();
 
-    // const NameCollection = db.collection('coffeeNames');
-    // const TypeCollection = db.collection('coffeeTypes');
-    // const SellerCollection = db.collection('coffeeSellers');
-    // const CoffeeDataCollection = db.collection('coffeeInformations');
-
     const singularNames = {
-        'coffeeNames': 'coffeeName',
-        'coffeeTypes': 'coffeeType',
-        'coffeeSellers': 'coffeeSeller',
-        'coffeeInformations': 'coffeeInformation',
+        'coffeeNames': 'coffeename',
+        'coffeeTypes': 'coffeetype',
+        'coffeeSellers': 'coffeeseller',
+        'coffeeInformations': 'coffeeinformation',
     }
     const d = await Promise.all ([
         'coffeeNames',
@@ -37,16 +31,22 @@ const {MongoClient, ObjectId} = require('mongodb');
                 JSON.stringify(rest)
             ];
         }).flat().join('\n');
-
+        // try
+        // {await axios.put(`http://localhost:9200/${ singularNames[name] }`, {});}
+        // catch(error){
+        //     console.log(error.response.data);
+        //     throw error;
+        // }
+        // console.log(esData);
         const resp = await axios.post(`http://localhost:9200/${ singularNames[name] }/_bulk`, esData + '\n', {
             headers: {
                 'Content-Type': 'application/x-ndjson'
             }
         });
-        // console.log(resp.data)
+        console.log(resp.data)
         return resp.data;
     })
     );
-    console.log(d);
+    console.log(d[0].items[0]);
     
 })()
