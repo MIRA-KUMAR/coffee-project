@@ -43,10 +43,10 @@ async function importData() {
         const db = connection.db();
 
         // 2. Creating collections 
-        const NameCollection = db.collection('coffeeNames');
-        const TypeCollection = db.collection('coffeeTypes');
-        const SellerCollection = db.collection('coffeeSellers');
-        const CoffeeDataCollection = db.collection('coffeeInformations');
+        const NameCollection = db.collection('coffeenames');
+        const TypeCollection = db.collection('coffeetypes');
+        const SellerCollection = db.collection('coffeesellers');
+        const CoffeeDataCollection = db.collection('coffeeinformations');
 
         const uniqueTypes = data.map((x) => x.type)
                                 .flat()                                                             // To convert into a single array
