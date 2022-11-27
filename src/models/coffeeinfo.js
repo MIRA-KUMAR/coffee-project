@@ -4,8 +4,7 @@ mongoose.model(
     'CoffeeInformation',
     mongoose.Schema({
         name: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'CoffeeName',
+            type: String, 
             required: true,
         },
         type: [{

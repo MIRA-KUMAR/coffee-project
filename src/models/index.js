@@ -1,4 +1,4 @@
 require('./coffeeinfo');
 require('./coffeetype');
-require('./coffeename');
+// require('./coffeename');
 require('./coffeeseller');
