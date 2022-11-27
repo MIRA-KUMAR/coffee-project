@@ -6,7 +6,7 @@ const schema = joi.object({
 });
 
 const bodySchema = joi.object({
-    name: joi.string().hex().length(24),
+    name: joi.string(),
     type: joi.array().items(joi.string().hex().length(24)),
     rating: joi.number(),
     reviews: joi.number(),
