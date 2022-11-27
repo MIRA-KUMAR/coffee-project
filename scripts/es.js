@@ -11,16 +11,16 @@ const {MongoClient, ObjectId} = require('mongodb');
     const db = connection.db();
 
     const singularNames = {
-        'coffeeNames': 'coffeename',
-        'coffeeTypes': 'coffeetype',
-        'coffeeSellers': 'coffeeseller',
-        'coffeeInformations': 'coffeeinformation',
+        'coffeenames': 'coffeename',
+        'coffeetypes': 'coffeetype',
+        'coffeesellers': 'coffeeseller',
+        'coffeeinformations': 'coffeeinformation',
     }
     const d = await Promise.all ([
-        'coffeeNames',
-        'coffeeTypes',
-        'coffeeSellers',
-        'coffeeInformations'
+        'coffeenames',
+        'coffeetypes',
+        'coffeesellers',
+        'coffeeinformations'
     ].map(async (name)=> {
         const Collection = db.collection(name);
         const data = await Collection.find().toArray();
