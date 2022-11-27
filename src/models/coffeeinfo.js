@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 mongoose.model(
     'CoffeeInformation',
     mongoose.Schema({
-        name: [{
+        name: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'CoffeeName',
-        }],
+            required: true,
+        },
         type: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'CoffeeType',

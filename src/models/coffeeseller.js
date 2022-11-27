@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.Model(
+mongoose.model(
     'CoffeeSeller',
     mongoose.Schema({
         name: {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.Model(
+mongoose.model(
     'CoffeeType',
     mongoose.Schema({
         name: {
