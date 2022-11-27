@@ -43,7 +43,7 @@ async function importData() {
         const db = connection.db();
 
         // 2. Creating collections 
-        const NameCollection = db.collection('coffeenames');
+        // const NameCollection = db.collection('coffeenames');
         const TypeCollection = db.collection('coffeetypes');
         const SellerCollection = db.collection('coffeesellers');
         const CoffeeDataCollection = db.collection('coffeeinformations');
@@ -52,9 +52,9 @@ async function importData() {
                                 .flat()                                                             // To convert into a single array
                                 .filter((x, i, a)=> a.indexOf(x) === i);
         
-        const uniqueCoffee = data.map((x) => x.name)
-                                .flat()                                                             // To convert into a single array
-                                .filter((x, i, a)=> a.indexOf(x) === i);
+        // const uniqueCoffee = data.map((x) => x.name)
+        //                         .flat()                                                             // To convert into a single array
+        //                         .filter((x, i, a)=> a.indexOf(x) === i);
                         
         const uniqueSeller = data.map((x) => x.seller)
                                 .flat()
@@ -70,14 +70,14 @@ async function importData() {
             }
         });
 
-        const coffeeData = uniqueCoffee.map((coffee) => {
-            return {
-                _id: ObjectId(),
-                name: coffee,
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            }
-        });
+        // const coffeeData = uniqueCoffee.map((coffee) => {
+        //     return {
+        //         _id: ObjectId(),
+        //         name: coffee,
+        //         createdAt: new Date(),
+        //         updatedAt: new Date(),
+        //     }
+        // });
 
         const sellerData = uniqueSeller.map((seller) => {
             return {
@@ -91,14 +91,15 @@ async function importData() {
         // console.log(data);
         
         const newData = data.map((obj) => {
-            if (Array.isArray(obj.name)) {
-                obj.name = obj.name.map((coffeeName) =>
-                    coffeeData.find(x => x.name === coffeeName)._id
-                );
-            }
-            else {
-                obj.name = [coffeeData.find(x => x.name === obj.name)._id]
-            }
+            // if (Array.isArray(obj.name)) {
+            //     obj.name = obj.name.map((coffeeName) =>
+            //         coffeeData.find(x => x.name === coffeeName)._id
+            //     );
+            //     obj.name = obj.name.join();
+            // }
+            // else {
+            //     obj.name = coffeeData.find(x => x.name === obj.name)._id
+            // }
             if (Array.isArray(obj.type)) {
                 obj.type = obj.type.map((typeName) => 
                     typeData.find(x => x.name === typeName)._id
@@ -126,7 +127,7 @@ async function importData() {
         // 3. Insert into collections
 
         await TypeCollection.insertMany(typeData);
-        await NameCollection.insertMany(coffeeData);
+        // await NameCollection.insertMany(coffeeData);
         await SellerCollection.insertMany(sellerData);
         await CoffeeDataCollection.insertMany(newData);
         console.log('Inserted to DB!')

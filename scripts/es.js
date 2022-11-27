@@ -11,13 +11,13 @@ const {MongoClient, ObjectId} = require('mongodb');
     const db = connection.db();
 
     const singularNames = {
-        'coffeenames': 'coffeename',
+        // 'coffeenames': 'coffeename',
         'coffeetypes': 'coffeetype',
         'coffeesellers': 'coffeeseller',
         'coffeeinformations': 'coffeeinformation',
     }
     const d = await Promise.all ([
-        'coffeenames',
+        // 'coffeenames',
         'coffeetypes',
         'coffeesellers',
         'coffeeinformations'
